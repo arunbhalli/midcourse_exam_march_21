@@ -21,10 +21,16 @@ class GHSearch extends Component {
     this.setState({username:user.login})
   }
 	render() {
+    let user
+    if (this.state.username){
+      user = 
+      <p>this.state.username</p>
+    }
 		return (
 			<>
 				<Input type="text" name="search" placeholder="Input GH username" />
 				<Button name="search" onClick={() => {this.handleSearch()}}>Search </Button>
+        <h1>User Name: {this.state.username}</h1>
 			</>
 		);
 	}
