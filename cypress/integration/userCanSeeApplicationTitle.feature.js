@@ -1,16 +1,16 @@
 describe('Application main view', () => {
   beforeEach(() => {
-   cy.visit("/")
+    cy.intercept('Get', 'https://https://developer.github.com/v3/search/ussers', {
+      fixture: 'SearchListOfUsers.json',
+    });
+    cy.visit('/');
   });
 
-  it('contains titel', () => {
-    cy.get("section[name='title']")
-      .should('contain', 'GitHub Search engine')
+ 
+  it("is expected to display results of search querry", () => {
+    cy.get('[data-cy="user-search-input"]').type("barack");
+    cy.get('[data-cy="search-button"]').click();
+    cy.get('[data-cy="results"]').should("be.visible");
   });
-  it("display the expected dtails of user", () => {
-    cy.get("[data-cy=search]").within(() => {
-      cy.get("[data-cy=user-name]").should("contain","Barack")
-    })
-  })
 
 });
