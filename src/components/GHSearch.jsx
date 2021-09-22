@@ -14,26 +14,34 @@ const GHSearch = () => {
   };
 
   const inputHandler = (event) => {
-    setQuery(event.target.value);
+    searchUser(query);
+    setQuery('');
   };
   let displayResults = results.map((user, i) => {
     return (
       <Container text>
-        <Header>User {i}:</Header>
-        <p>{JSON.stringify(user)}</p>
+        <Header data-cy='serial-no-of-user'>User {i+1}:</Header>
+        <h1 data-cy='user-name'>{user.login}</h1>
+        <div data-cy='img-of-user'>
+          <img src={user.avatar_url} alt={user.publicPath} />
+        </div>
+        <p></p>
       </Container>
     );
   });
   return (
     <>
       <Input
-        onChange={(event) => inputHandler(event)}
+        onChange={(event) => setQuery(event.target.value)}
         data-cy='user-search-input'
         type='text'
         name='search'
         placeholder='Input GH username'
       />
-      <Button onClick={() => searchUser()} data-cy='search-button' name='search'>
+      <Button
+        onClick={() => inputHandler()}
+        data-cy='search-button'
+        name='search'>
         Search
       </Button>
       {displayResults.length > 0 && (
