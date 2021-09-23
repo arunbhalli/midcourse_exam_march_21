@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Container, Header, Input } from 'semantic-ui-react';
+import { Button, Container, Header, Input, Grid } from 'semantic-ui-react';
 import axios from 'axios';
 
 const GHSearch = () => {
@@ -19,13 +19,20 @@ const GHSearch = () => {
   };
   let displayResults = results.map((user, i) => {
     return (
-      <Container text>
-        <Header data-cy='serial-no-of-user'>User {i+1}:</Header>
-        <h1 data-cy='user-name'>{user.login}</h1>
-        <div data-cy='img-of-user'>
+      <Container>
+        <div
+          data-cy='img-of-user'
+          style={{
+            backgroundColor: '#FF7F50',
+            border: '5px solid #000 ',
+            height: '400px',
+            width: '300px',
+            marginTop: '10px',
+          }}>
           <img src={user.avatar_url} alt={user.publicPath} />
+          <Header data-cy='serial-no-of-user'>User {i + 1}:</Header>
+          <h1 data-cy='user-name'>{user.login}</h1>
         </div>
-        <p></p>
       </Container>
     );
   });
